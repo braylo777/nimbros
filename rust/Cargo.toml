@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = ["nimbros-sign", "nimbros-quote", "nimbros-quote-wasm", "nimbros-indexer"]
+
+[workspace.package]
+edition = "2021"
+license = "UNLICENSED"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"

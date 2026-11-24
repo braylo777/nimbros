@@ -1,0 +1,351 @@
+[
+  {
+    "step": "initialize",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-03-26"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2025-03-26",
+        "capabilities": {
+          "tools": {}
+        },
+        "serverInfo": {
+          "name": "nimbros",
+          "version": "0.1.0"
+        }
+      }
+    }
+  },
+  {
+    "step": "ping",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "ping"
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {}
+    }
+  },
+  {
+    "step": "list",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "tools/list"
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "tools": [
+          {
+            "name": "discover_tokens",
+            "description": "Live Solana memecoin lists from pump.fun, bonk.fun, Moonshot, Meteora, Raydium and more. kind=snipe: newest liquid pools. kind=scalp: graduated, trending pools.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "snipe",
+                    "scalp"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            }
+          },
+          {
+            "name": "token_safety",
+            "description": "On-chain checks for a coin: mint authority, freeze authority, supply.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "type": "string",
+                  "description": "token mint address (base58)"
+                }
+              },
+              "required": [
+                "coin"
+              ]
+            }
+          },
+          {
+            "name": "shield_scan",
+            "description": "Read-only security report for a Solana wallet: risk level and score, open token approvals (who can spend your tokens), per-coin red flags (live mint/freeze keys, concentrated ownership, serial deployers), recent activity.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "description": "Solana wallet address"
+                }
+              },
+              "required": [
+                "address"
+              ]
+            }
+          },
+          {
+            "name": "shield_screen",
+            "description": "Screen an UNSIGNED base64 Solana transaction before signing: unknown programs, token approvals, authority changes, accounts closed into someone else's wallet, SOL leaving, scam-watchlist wallets. Verdict safe | review | block.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "tx": {
+                  "type": "string",
+                  "description": "base64 unsigned transaction"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "the signing wallet"
+                }
+              },
+              "required": [
+                "tx",
+                "address"
+              ]
+            }
+          },
+          {
+            "name": "track_wallet",
+            "description": "Public snapshot of any wallet: SOL, holdings, latest moves, and whether it is on the scam watchlist.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "description": "Solana wallet address"
+                }
+              },
+              "required": [
+                "address"
+              ]
+            }
+          },
+          {
+            "name": "chain_feed",
+            "description": "Fresh pools on another chain (base, bsc, eth) with red-flag hints. Discovery only: swaps are Solana-only.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "chain": {
+                  "type": "string",
+                  "enum": [
+                    "base",
+                    "bsc",
+                    "eth"
+                  ]
+                }
+              },
+              "required": [
+                "chain"
+              ]
+            }
+          },
+          {
+            "name": "shield_watch",
+            "description": "Have NimBros watch a wallet in the background (up to 5) and send a signed `shield_alert` to your webhook when a new approval or coin danger appears. Needs a webhook (set_webhook). on:false stops.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "description": "Solana wallet address"
+                },
+                "on": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "address"
+              ]
+            }
+          },
+          {
+            "name": "list_launches",
+            "description": "Coins launched through NimBros, newest first.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          {
+            "name": "register_agent",
+            "description": "Create an agent identity. Returns an API key once; keep it. Trading real money also needs link_wallet.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "2-24 chars"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          {
+            "name": "set_alert",
+            "description": "Server-side price alert; delivered to your webhook.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "type": "string",
+                  "description": "token mint address"
+                },
+                "dir": {
+                  "type": "string",
+                  "enum": [
+                    "above",
+                    "below"
+                  ]
+                },
+                "price": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "coin",
+                "dir",
+                "price"
+              ]
+            }
+          },
+          {
+            "name": "cancel",
+            "description": "Cancel an open alert by id.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "alert id"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          {
+            "name": "set_webhook",
+            "description": "Get signed JSON events (alerts) at your public https URL. Pass url:null to remove. The signing secret is returned once.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "url"
+              ]
+            }
+          },
+          {
+            "name": "link_wallet",
+            "description": "Prove your agent controls a Solana wallet: sign the message `nimbros-link:<your agent id>` (ed25519, raw UTF-8 bytes) and send the base64 signature plus your address. Required before any real trade.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "signature": {
+                  "type": "string",
+                  "description": "base64 ed25519 signature"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "the Solana wallet address that made the signature"
+                }
+              },
+              "required": [
+                "signature",
+                "address"
+              ]
+            }
+          },
+          {
+            "name": "unlink_wallet",
+            "description": "Remove the linked wallet from your agent.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          {
+            "name": "build_trade",
+            "description": "REAL swap against SOL via Jupiter, returned UNSIGNED and already simulated (txBytes = a base64 Solana VersionedTransaction: deserialize, sign with your ed25519 key, submit with sendTransaction). Needs an approved, linked wallet; capped per trade and per 24h. buy: amount = SOL to spend. sell: amount = coins to sell. The nimbros CLI does all of this for you: `nimbros trade`.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "side": {
+                  "type": "string",
+                  "enum": [
+                    "buy",
+                    "sell"
+                  ]
+                },
+                "coin": {
+                  "type": "string",
+                  "description": "token mint address"
+                },
+                "amount": {
+                  "type": "string",
+                  "description": "plain decimal, e.g. 0.5"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "your linked address"
+                },
+                "slippageBps": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "side",
+                "coin",
+                "amount",
+                "address"
+              ]
+            }
+          },
+          {
+            "name": "report_trade",
+            "description": "After you execute a built trade, send its digest so NimBros records the on-chain result.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "type": "string",
+                  "description": "transaction signature"
+                }
+              },
+              "required": [
+                "digest"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+]

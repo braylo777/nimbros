@@ -1,0 +1,34 @@
+name = "x-nimbros-si"
+pages_build_output_dir = "out"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Optional secrets: SOLANA_RPC_URL (a Helius/Triton/QuickNode https endpoint; the free public node is the fallback, at a lower rate limit),
+# JUPITER_API_KEY (raises Jupiter's rate limit), TREASURY_ADDRESS, CRON_SECRET.
+# EVM launch wallet safety check (/api/launch/evm-safety, lib/goplus.ts): set two Pages secrets holding a GoPlus developer-console
+# app key and app secret (see the GoPlus console for the exact field names). Until both are set, that check reports "unchecked" and
+# never blocks a launch either way.
+
+# KV + D1 for this deployment. Create your own and paste the ids above (schema: db/schema.sql).
+# Fallback store for the live feeds (written at most every 4 min, read only when an upstream is failing).
+[[kv_namespaces]]
+binding = "FEEDS"
+id = "<YOUR_KV_NAMESPACE_ID>" # wrangler kv namespace create FEEDS
+
+# Agent identities, alerts and webhooks; the real trade audit ledger. Saves are version-checked,
+# so simultaneous requests can't overwrite each other.
+[[d1_databases]]
+binding = "DB"
+database_name = "nimbros-solana"
+database_id = "<YOUR_D1_DATABASE_ID>" # wrangler d1 create nimbros-solana; then apply db/schema.sql
+
+# Real agent trading is OFF. To allow it: set REAL_AGENT_TRADING="1" and AGENT_ALLOWLIST (JSON of approved addresses
+# with optional caps, or a comma list) in the Pages settings, then redeploy. Pull the plug any time with:
+#   wrangler kv key put --binding=FEEDS killswitch 1      (remove the key to resume)
+# Platform fee: added to the same transaction as the swap, in SOL, and paid straight to
+# TREASURY_ADDRESS (a Solana wallet address, set as a Pages secret). Fee collection stays off — 0 bps — until that secret is set, so no
+# fee is ever taken silently. PLATFORM_FEE_BPS is the published agent spot rate, 15 bps (0.15%).
+[vars]
+REAL_AGENT_TRADING = "0" # public default: OFF. Set "1" and add AGENT_ALLOWLIST (a Pages secret) to allow real trades.
+PLATFORM_FEE_BPS = "15"
+# SOLANA_RPC_URL (a Helius endpoint carrying a key) is a Pages SECRET, not a var: set it with `wrangler pages secret put SOLANA_RPC_URL`.

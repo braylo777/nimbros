@@ -1,0 +1,8 @@
+[package]
+name = "nimbros-quote"
+version = "0.1.0"
+edition.workspace = true
+description = "Local quote math: constant-product pools, price impact, minimum-output sizing and optimal split across pools. Integer only, no network."
+
+[dependencies]
+ruint = "1"

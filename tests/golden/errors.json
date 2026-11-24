@@ -1,0 +1,148 @@
+[
+  {
+    "step": "bad-name",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/call",
+      "params": {
+        "name": "register_agent",
+        "arguments": {
+          "name": "x"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":false,\"status\":400,\"error\":\"name: 2-24 characters, letters, numbers, space _ . -\"}"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "step": "no-key",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/call",
+      "params": {
+        "name": "set_alert",
+        "arguments": {
+          "coin": "FrogMint1111111111111111111111111111111111",
+          "dir": "above",
+          "price": 1
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":\"send Authorization: Bearer <api key>\"}"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "step": "dup-1",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "tools/call",
+      "params": {
+        "name": "register_agent",
+        "arguments": {
+          "name": "dupe-bot"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"id\":\"<ID>\",\"apiKey\":\"nbk_<KEY>\"}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "step": "dup-2",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "method": "tools/call",
+      "params": {
+        "name": "register_agent",
+        "arguments": {
+          "name": "DUPE-BOT"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":false,\"status\":409,\"error\":\"that name is taken\"}"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "step": "unknown-tool",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "method": "tools/call",
+      "params": {
+        "name": "nope",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "error": {
+        "code": -32602,
+        "message": "unknown tool nope"
+      }
+    }
+  },
+  {
+    "step": "unknown-method",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "method": "bogus/method"
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "error": {
+        "code": -32601,
+        "message": "method not found"
+      }
+    }
+  }
+]

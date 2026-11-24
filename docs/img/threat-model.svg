@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="Helvetica,Arial,sans-serif" font-size="14">
+<rect width="900" height="380" fill="#0b0f17"/>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#8aa0c8"/></marker></defs>
+<text x="20" y="28" fill="#e8eefc" font-size="18" font-weight="bold">Threat model: trust boundaries</text>
+<rect x="20" y="50" width="250" height="300" rx="10" fill="none" stroke="#c9a227" stroke-dasharray="6 4"/><text x="30" y="70" fill="#c9a227">Untrusted</text>
+<rect x="40" y="90" width="210" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="145.0" y="116.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Agents / browsers</text>
+<text x="145.0" y="134.0" fill="#8aa0c8" text-anchor="middle" font-size="12">any input</text>
+<rect x="40" y="170" width="210" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="145.0" y="196.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Upstream APIs</text>
+<text x="145.0" y="214.0" fill="#8aa0c8" text-anchor="middle" font-size="12">can lie or fail</text>
+<rect x="40" y="250" width="210" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="145.0" y="276.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Webhook targets</text>
+<text x="145.0" y="294.0" fill="#8aa0c8" text-anchor="middle" font-size="12">public https only</text>
+<rect x="320" y="50" width="300" height="300" rx="10" fill="none" stroke="#4a6fb5" stroke-dasharray="6 4"/><text x="330" y="70" fill="#4a6fb5">NimBros edge (Cloudflare)</text>
+<rect x="350" y="90" width="240" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="470.0" y="116.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Validation</text>
+<text x="470.0" y="134.0" fill="#8aa0c8" text-anchor="middle" font-size="12">names, urls, amounts, schemas</text>
+<rect x="350" y="170" width="240" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="470.0" y="196.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Auth</text>
+<text x="470.0" y="214.0" fill="#8aa0c8" text-anchor="middle" font-size="12">API key hash, wallet signature</text>
+<rect x="350" y="250" width="240" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="470.0" y="276.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Limits</text>
+<text x="470.0" y="294.0" fill="#8aa0c8" text-anchor="middle" font-size="12">rate caps, trade caps, killswitch</text>
+<rect x="670" y="50" width="210" height="300" rx="10" fill="none" stroke="#3aa076" stroke-dasharray="6 4"/><text x="680" y="70" fill="#3aa076">Assets at risk</text>
+<rect x="690" y="90" width="170" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="775.0" y="116.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">User wallets</text>
+<text x="775.0" y="134.0" fill="#8aa0c8" text-anchor="middle" font-size="12">keys stay local</text>
+<rect x="690" y="170" width="170" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="775.0" y="196.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Treasury fee</text>
+<text x="775.0" y="214.0" fill="#8aa0c8" text-anchor="middle" font-size="12">one address, secret</text>
+<rect x="690" y="250" width="170" height="60" rx="8" fill="#1b2640" stroke="#4a6fb5"/>
+<text x="775.0" y="276.0" fill="#e8eefc" text-anchor="middle" font-weight="bold">Agent accounts</text>
+<text x="775.0" y="294.0" fill="#8aa0c8" text-anchor="middle" font-size="12">hash only</text>
+<line x1="250" y1="120" x2="350" y2="120" stroke="#8aa0c8" stroke-width="2" marker-end="url(#a)"/>
+<line x1="250" y1="200" x2="350" y2="200" stroke="#8aa0c8" stroke-width="2" marker-end="url(#a)"/>
+<line x1="250" y1="280" x2="350" y2="280" stroke="#8aa0c8" stroke-width="2" marker-end="url(#a)"/>
+<line x1="590" y1="200" x2="690" y2="120" stroke="#8aa0c8" stroke-width="2" marker-end="url(#a)"/>
+</svg>

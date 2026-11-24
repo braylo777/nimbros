@@ -1,0 +1,164 @@
+[
+  {
+    "step": "register",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/call",
+      "params": {
+        "name": "register_agent",
+        "arguments": {
+          "name": "golden-bot"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"id\":\"<ID>\",\"apiKey\":\"nbk_<KEY>\"}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "step": "alert",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/call",
+      "params": {
+        "name": "set_alert",
+        "arguments": {
+          "coin": "FrogMint1111111111111111111111111111111111",
+          "dir": "above",
+          "price": 1.25
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"alert\":{\"id\":\"<ID>\",\"coin\":\"FrogMint1111111111111111111111111111111111\",\"dir\":\"above\",\"price\":1.25,\"created\":0}}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "step": "webhook",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "tools/call",
+      "params": {
+        "name": "set_webhook",
+        "arguments": {
+          "url": "https://hooks.example.com/g"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"webhook\":\"https://hooks.example.com/g\",\"secret\":\"nbsec_<SECRET>\"}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "step": "cancel",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "method": "tools/call",
+      "params": {
+        "name": "cancel",
+        "arguments": {
+          "id": "<ID>"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"cancelled\":\"<ID>\"}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  },
+  {
+    "step": "cancel-again",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "method": "tools/call",
+      "params": {
+        "name": "cancel",
+        "arguments": {
+          "id": "<ID>"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":false,\"status\":404,\"error\":\"no alert with that id\"}"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "step": "unlink",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "method": "tools/call",
+      "params": {
+        "name": "unlink_wallet",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"wallet\":null}"
+          }
+        ],
+        "isError": false
+      }
+    }
+  }
+]

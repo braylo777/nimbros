@@ -1,0 +1,26 @@
+# fly launch --no-deploy --copy-config --name nimbros-indexer   (then: fly volumes create data --size 1; fly deploy)
+app = "nimbros-indexer"
+primary_region = "sjc"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  INDEXER_DB = "/data/indexer.db"
+
+[mounts]
+  source = "data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"   # it has to stay awake to follow the chain
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    path = "/health"
+    interval = "15s"
+    timeout = "3s"

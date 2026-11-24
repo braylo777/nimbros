@@ -1,0 +1,21 @@
+[package]
+name = "nimbros-quote-wasm"
+version = "0.1.0"
+edition.workspace = true
+description = "WASM bindings for nimbros-quote: an independent, offline cross-check on an aggregator's swap quote, run in the browser before a trade is shown for review."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+nimbros-quote = { path = "../nimbros-quote" }
+wasm-bindgen = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
+
+[profile.release]
+opt-level = "z"
+lto = true
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false # wasm-opt trips on this exFAT drive's "._" resource-fork ghost files; the crate is tiny anyway, so skip it

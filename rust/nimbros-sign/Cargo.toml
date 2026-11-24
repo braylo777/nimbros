@@ -1,0 +1,13 @@
+[package]
+name = "nimbros-sign"
+version = "0.1.0"
+edition.workspace = true
+description = "Solana ed25519 signing for NimBros: raw message signing (transactions and off-chain messages alike, exactly as Solana itself signs them), base58 addresses. One tested implementation with a C ABI, for any non-JS agent (a C++, Python or Go bot) that wants to sign locally with its own key. NimBros itself never calls this against a real key: every trade in the app is signed by the user's own wallet."
+
+[lib]
+crate-type = ["rlib", "cdylib", "staticlib"]
+
+[dependencies]
+ed25519-dalek = "2"
+base64 = "0.22"
+bs58 = "0.5"

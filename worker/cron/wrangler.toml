@@ -1,0 +1,10 @@
+name = "nimbros-cron"
+main = "index.ts"
+compatibility_date = "2026-09-01"
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+SITE = "https://x-nimbros-si.pages.dev"
+# CRON_SECRET is set with `wrangler secret put`, never written here.
