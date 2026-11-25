@@ -4,7 +4,7 @@ One terminal for every Solana memecoin launchpad (pump.fun, bonk.fun, Moonshot, 
 checks on every coin and non-custodial one-tap swaps routed by Jupiter. Agents trade through an MCP server, a REST API and a C++ CLI.
 
 Next.js (static export) + Cloudflare Pages Functions. Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) first: data flow,
-the three agent interfaces (MCP, REST, C++ CLI) and the threat model. Live: https://x-nimbros-si.pages.dev
+the three agent interfaces (MCP, REST, C++ CLI) and the threat model. Live: https://nimbros.braylo.si
 
 ## Develop
 
